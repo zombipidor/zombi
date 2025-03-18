@@ -1,0 +1,179 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+      background: url('https://www.toptal.com/designers/subtlepatterns/uploads/dark_mosaic.png');
+      color: lime;
+      font-family: Comic Sans MS, Impact, sans-serif;
+      text-align: center;
+      position: relative;
+      overflow-x: hidden;
+  }
+  
+
+  #loadingScreen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+  }
+  
+  #matrix {
+      font-family: 'Courier New', monospace;
+      font-size: 20px;
+      color: #00FF00;
+      text-align: center;
+  }
+  
+  #message {
+      font-size: 30px;
+      margin-bottom: 20px;
+  }
+  
+  #loadingText {
+      font-size: 18px;
+      margin-top: 20px;
+  }
+  
+
+  #mainContent {
+      padding: 20px;
+      text-align: center;
+      display: none;
+  }
+  
+  #background {
+      background-color: #000;
+  }
+  
+  h1 {
+      text-shadow: 2px 2px 5px red;
+      animation: blink 0.5s infinite alternate;
+  }
+  
+  @keyframes blink {
+      from {opacity: 1;}
+      to {opacity: 0;}
+  }
+  
+  input {
+      width: 400px;
+      height: 50px;
+      font-size: 20px;
+      border: 5px solid yellow;
+      background: black;
+      color: cyan;
+      text-align: center;
+  }
+  
+  .btn {
+      display: block;
+      width: 420px;
+      height: 60px;
+      margin: 20px auto;
+      font-size: 30px;
+      font-weight: bold;
+      background: linear-gradient(to bottom, red, yellow);
+      color: blue;
+      border: 10px double white;
+      box-shadow: 5px 5px 15px purple;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: transform 0.2s ease-in-out;
+  }
+  
+  .btn:hover {
+      transform: scale(1.1);
+  }
+  
+  marquee {
+      font-size: 24px;
+      color: magenta;
+      font-weight: bold;
+  }
+  
+  .big-warning {
+      position: absolute;
+      top: 0;
+      font-size: 100px;
+      font-weight: bold;
+      color: red;
+      animation: blink-fast 0.2s infinite alternate;
+      writing-mode: vertical-rl;
+      text-orientation: upright;
+  }
+  @keyframes blink-fast {
+      from {opacity: 1;}
+      to {opacity: 0;}
+  }
+  
+  .left {
+      left: 10px;
+  }
+  
+  .right {
+      right: 10px;
+  }
+  
+  .sticker {
+      position: absolute;
+      font-size: 50px;
+      font-weight: bold;
+      background: yellow;
+      color: red;
+      padding: 10px;
+      transform: rotate(-10deg);
+  }
+  
+  .sticker1 {
+      top: 50px;
+      left: 50px;
+  }
+  
+  .sticker2 {
+      top: 200px;
+      right: 50px;
+      transform: rotate(10deg);
+  }
+  
+  #sentMessage {
+      font-size: 30px;
+      font-weight: bold;
+      color: white;
+      margin-top: 20px;
+      text-shadow: 2px 2px 5px green;
+  }
+  
+  .hidden {
+      display: none;
+  }
+  
+  h2 {
+      margin-top: 50px;
+      color: yellow;
+      font-size: 35px;
+      text-shadow: 2px 2px 5px red;
+  }
+  
+  ul {
+      list-style-type: none;
+      padding: 0;
+      color: white;
+      font-size: 25px;
+  }
+  
+  ul li {
+      background: rgba(0, 0, 0, 0.8);
+      padding: 10px;
+      margin: 5px;
+      border-left: 5px solid yellow;
+  }

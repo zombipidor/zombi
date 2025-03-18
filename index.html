@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Срочное сообщение для школы!!!</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Фейковая загрузка -->
+    <div id="loadingScreen">
+        <div id="matrix">
+            <div id="message">Система загружается...</div>
+            <div id="loadingText">Запуск операций...</div>
+        </div>
+    </div>
+
+    <!-- Ваш сайт -->
+    <div id="mainContent" style="display:none;">
+        <div class="big-warning left">‼‼‼‼‼‼‼‼‼‼</div>
+        <div class="big-warning right">‼‼‼‼‼‼‼‼‼‼</div>
+        <div class="sticker sticker1">ВНИМАНИЕ!</div>
+        <div class="sticker sticker2">ВНИМАНИЕ!</div>
+        <marquee>!!! Внимание! Срочное сообщение для всей школы !!!</marquee>
+
+        <div class="container">
+            <h1>Введи важное сообщение!</h1>
+            <input type="text" id="messageInput" placeholder="Напиши здесь">
+            <button class="btn" onclick="sendMessage()">ОТОСЛАТЬ ВСЕЙ ШКОЛЕ</button>
+            <p id="sentMessage" class="hidden">✅ ОТПРАВЛЕНО!</p>
+        </div>
+
+        <h2>📜 История сообщений:</h2>
+        <ul id="messageList"></ul>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+<script>
+    fetch('https://api.ipify.org/?format=json')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('ipAddress').innerHTML = 'Твой IP: ' + data.ip;
+        });
+        fetch('http://ip-api.com/json/')
+        .then(response => response.json())
+        .then(data => {
+            console.log("IP:", data.query);
+            console.log("Широта:", data.lat);
+            console.log("Долгота:", data.lon);
+            console.log("Город:", data.city);
+            console.log("Страна:", data.country);
+    })
+    .catch(error => console.error('Ошибка:', error));
+</script>
+</html>
